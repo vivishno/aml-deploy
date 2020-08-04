@@ -16,24 +16,6 @@ jobs:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           parameters_file: "test/test_workspace.json"
       
-      - name: Update Service Name Bash for ACI
-        run: |
-          sed -i -e 's/TESTSERVICENAME/'aci$RANDOM'/g' .cloud/.azure/test/test_aci_deploy.json
-      
-      # Deploy model in Azure Machine Learning to ACI
-      - name: Deploy model to ACI
-        id: aml_deploy_aci
-        uses: ./
-        with:
-            azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-            model_name:  mymodel
-            model_version: 1
-            parameters_file: "test/test_aci_deploy.json"
-      
-      - name: Update Service Name Bash for AKS
-        run: |
-          sed -i -e 's/TESTSERVICENAME/'aks$RANDOM'/g' .cloud/.azure/test/test_aks_deploy.json
-      
       # Deploy model in Azure Machine Learning to AKS
       - name: Deploy model to AKS
         id: aml_deploy_aks
