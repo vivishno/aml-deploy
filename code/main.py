@@ -226,9 +226,15 @@ def main():
             deployment_target = None
         except TypeError:
             deployment_target = None
-
+        if deployment_target == None:
+            attach_config = AksCompute.attach_configuration(resource_group ="testaks",cluster_name = "myakas")
+            deployment_target= ComputeTarget.attach(ws, 'myakas', attach_config)
+            deployment_target.wait_for_completion(show_output = True)
+            print("here------------------------------------2")
         # Creating deployment config
         print("::debug::Creating deployment config")
+        print("here------------------------------------3")
+        print(deployment_target)
         if type(deployment_target) is AksCompute:
             deployment_config = AksWebservice.deploy_configuration(
                 autoscale_enabled=parameters.get("autoscale_enabled", None),
