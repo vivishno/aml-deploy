@@ -8,13 +8,6 @@ jobs:
         id: checkout_repository
         uses: actions/checkout@v2
       
-      # Connect to existing workspace
-      - name: Create Workspace
-        id: ws_create
-        uses: Azure/aml-workspace@v1
-        with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-          parameters_file: "test/test_workspace.json"
       
       # Deploy model in Azure Machine Learning to AKS
       - name: Deploy model to AKS
