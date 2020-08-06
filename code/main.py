@@ -227,8 +227,8 @@ def main():
         except TypeError:
             deployment_target = None
         if deployment_target == None:
-           attach_config = AksCompute.attach_configuration(resource_group ="testaks",cluster_name = "myaks2",cluster_purpose = AksCompute.ClusterPurpose.DEV_TEST) 
-           deployment_target= ComputeTarget.attach(ws, 'myaks2', attach_config)
+           attach_config = AksCompute.attach_configuration(resource_group ="attachaks",cluster_name = "testkube",cluster_purpose = AksCompute.ClusterPurpose.DEV_TEST) 
+           deployment_target= ComputeTarget.attach(ws, 'testkube', attach_config)
            deployment_target.wait_for_completion(show_output = True)
            print("here------------------------------------2")   
         # Creating deployment config
