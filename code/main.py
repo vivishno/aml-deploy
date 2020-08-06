@@ -228,8 +228,8 @@ def main():
             deployment_target = None
         if deployment_target == None:
            try:
-                attach_config = AksCompute.attach_configuration(resource_group ="testaks",cluster_name = "myakas2",cluster_purpose = AksCompute.ClusterPurpose.DEV_TEST)
-                deployment_target= ComputeTarget.attach(ws, 'myakas2', attach_config)
+                attach_config = AksCompute.attach_configuration(resource_group ="testaks",cluster_name = "myakas",cluster_purpose = AksCompute.ClusterPurpose.DEV_TEST)
+                deployment_target= ComputeTarget.attach(ws, 'myakas', attach_config)
                 deployment_target.wait_for_completion(show_output = True)
                 print("here------------------------------------2")
            except ComputeTargetException:
