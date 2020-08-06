@@ -15,6 +15,10 @@ inputs:
     description: "JSON file including the parameters for deployment. This looks in the .ml/.azure/ directory"
     required: true
     default: "deploy.json"
+  resource_grp:
+    description: "resource group"
+    required: false
+    default: ""
 outputs:
   service_scoring_uri:
     description: "Scoring URI of the webservice that was created (only provided if delete_service_after_deployment is set to False)"
