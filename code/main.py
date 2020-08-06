@@ -22,7 +22,7 @@ def main():
     print("::debug::Loading input values")
     model_name = os.environ.get("INPUT_MODEL_NAME", default=None)
     model_version = os.environ.get("INPUT_MODEL_VERSION", default=None)
-    resource_grp= os.environ.get("INPUT_RESOURCE_GRP", default=None)
+    resource_grp= os.environ.get("INPUT_RESOURCE_GRP", default=None) 
     # Casting input values
     print("::debug::Casting input values")
     try:
