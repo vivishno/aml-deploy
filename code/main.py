@@ -220,7 +220,7 @@ def main():
         try:
             deployment_target = ComputeTarget(
                 workspace=ws,
-                name=parameters.get("deployment_compute_target", "")
+                name=parameters.get("deployment_compute_target", "") 
             )
         except ComputeTargetException:
             deployment_target = None
