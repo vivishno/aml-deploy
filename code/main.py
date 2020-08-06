@@ -22,7 +22,7 @@ def main():
     print("::debug::Loading input values")
     model_name = os.environ.get("INPUT_MODEL_NAME", default=None)
     model_version = os.environ.get("INPUT_MODEL_VERSION", default=None)
-
+    resource_grp= os.environ.get("INPUT_RESOURCE_GRP", default=None)
     # Casting input values
     print("::debug::Casting input values")
     try:
@@ -217,24 +217,25 @@ def main():
 
         # Loading deployment target
         print("::debug::Loading deployment target")
+        compute_name=parameters.get("deployment_compute_target", "");
         try:
             deployment_target = ComputeTarget(
                 workspace=ws,
-                name=parameters.get("deployment_compute_target", "") 
+                name=compute_name 
             )
         except ComputeTargetException:
             deployment_target = None
         except TypeError:
             deployment_target = None
         if deployment_target == None:
-           attach_config = AksCompute.attach_configuration(resource_group ="attachaks",cluster_name = "testkube",cluster_purpose = AksCompute.ClusterPurpose.DEV_TEST) 
-           deployment_target= ComputeTarget.attach(ws, 'testkube', attach_config)
-           deployment_target.wait_for_completion(show_output = True)
-           print("here------------------------------------2")   
+           try:
+               attach_config = AksCompute.attach_configuration(resource_group =resource_grp,cluster_name = compute_name,cluster_purpose = AksCompute.ClusterPurpose.DEV_TEST) 
+               deployment_target= ComputeTarget.attach(ws, 'testkube', attach_config)
+               deployment_target.wait_for_completion(show_output = True)
+           except ComputeTargetException:
+               deployment_target = None
         # Creating deployment config
         print("::debug::Creating deployment config")
-        print("here------------------------------------3")
-        print(deployment_target)
         if type(deployment_target) is AksCompute:
             deployment_config = AksWebservice.deploy_configuration(
                 autoscale_enabled=parameters.get("autoscale_enabled", None),
