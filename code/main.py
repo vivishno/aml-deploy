@@ -128,7 +128,7 @@ def main():
 
     # Creating inference config
     print("::debug::Creating inference config")
-    if os.environ.get("CONTAINER_REGISTRY_ADRESS", None) is not None:
+    if os.environ.get("CONTAINER_REGISTRY_ADRESS", None) is not None: 
         container_registry = ContainerRegistry()
         container_registry.address = os.environ.get("CONTAINER_REGISTRY_ADRESS", None)
         container_registry.username = os.environ.get("CONTAINER_REGISTRY_USERNAME", None)
