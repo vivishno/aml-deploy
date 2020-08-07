@@ -1,13 +1,4 @@
 name: Integration Test
-on: [ pull_request]  
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Out Repository
-        id: checkout_repository
-        uses: actions/checkout@v2
-        name: Integration Test
 on: [push , pull_request]
 jobs:
   build:
@@ -52,21 +43,3 @@ jobs:
             model_name:  mymodel
             model_version: 1
             parameters_file: "test/test_aks_deploy.json"
-
-      - name: Create Workspace
-        id: ws_create
-        uses: Azure/aml-workspace@v1
-        with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-          parameters_file: "test/test_workspace.json"
-      
-      # Deploy model in Azure Machine Learning to AKS
-      - name: Deploy model to AKS
-        id: aml_deploy_aks
-        uses: ./
-        with:
-            azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-            model_name:  mymodel
-            model_version: 1
-            parameters_file: "test/test_aks_deploy.json"
-            resource_grp: attachaks
