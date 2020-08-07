@@ -229,8 +229,8 @@ def main():
             deployment_target = None
         if deployment_target == None:
            try:
-               attach_config = AksCompute.attach_configuration(resource_group =resource_grp,cluster_name = compute_name,cluster_purpose = AksCompute.ClusterPurpose.DEV_TEST) 
-               deployment_target= ComputeTarget.attach(ws, 'testkube', attach_config)
+               attach_config = AksCompute.attach_configuration(resource_group =resource_grp,cluster_name = compute_name) 
+               deployment_target= ComputeTarget.attach(ws, compute_name, attach_config)
                deployment_target.wait_for_completion(show_output = True)
            except ComputeTargetException:
                deployment_target = None
